@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-slide
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: image-slide-frontend
+  replicas: 1 # You could also consider elastic scaling for this deployment
+  template:
+    metadata:
+      labels:
+        app: image-slide-frontend
+    spec:
+      containers:
+        - name: image-slide-frontend
+          image: ghcr.io/o-tr/imageslide-converter:release
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+          - configMapRef:
+              name: image-slide-config
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /api/healthz
+              port: 3000
+            failureThreshold: 180
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: "2"
+            requests:
+              memory: 1Gi
+              cpu: "0.5"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: image-slide-svc
+spec:
+  selector:
+    app: image-slide-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
