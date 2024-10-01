@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geo-weather
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: geo-weather
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: geo-weather
+    spec:
+      containers:
+        - name: geo-weather
+          image: ghcr.io/o-tr/geo-weather:release
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 180
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: "2"
+            requests:
+              memory: 1Gi
+              cpu: "0.5"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: geo-weather-config
+                  key: DATABASE_URL
+            - name: TURNSTILE_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: geo-weather-config
+                  key: TURNSTILE_SECRET
+            - name: IPINFO_API_TOKEN
+              valueFrom:
+                configMapKeyRef:
+                  name: geo-weather-config
+                  key: IPINFO_API_TOKEN
+            - name: TZ
+              value: Asia/Tokyo
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: geo-weather-svc
+spec:
+  selector:
+    app: geo-weather
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: geo-weather-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: geo-weather
