@@ -36,22 +36,10 @@ spec:
             requests:
               memory: 1Gi
               cpu: "0.5"
+          envFrom:
+          - configMapRef:
+              name: geo-weather-config
           env:
-            - name: DATABASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: geo-weather-config
-                  key: DATABASE_URL
-            - name: TURNSTILE_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  name: geo-weather-config
-                  key: TURNSTILE_SECRET
-            - name: IPINFO_API_TOKEN
-              valueFrom:
-                configMapKeyRef:
-                  name: geo-weather-config
-                  key: IPINFO_API_TOKEN
             - name: TZ
               value: Asia/Tokyo
 ---
