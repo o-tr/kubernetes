@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-api
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: vote-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vote-api
+    spec:
+      containers:
+        - name: vote-api
+          image: ghcr.io/o-tr/vote-api:release
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 180
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+            requests:
+              memory: 1Gi
+              cpu: "0.5"
+          envFrom:
+            - configMapRef:
+                name: vote-api-config
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vote-api-svc
+spec:
+  selector:
+    app: vote-api
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: vote-api-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: vote-api
