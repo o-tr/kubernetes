@@ -39,10 +39,7 @@ spec:
             - name: REDMINE_PLUGINS_MIGRATE
               value: "true"
             - name: REDMINE_SECRET_KEY_BASE
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: supersecretkey
+              value: "supersecretkey"
             - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
