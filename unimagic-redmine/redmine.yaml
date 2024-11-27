@@ -18,20 +18,21 @@ spec:
       containers:
         - image: redmine:6-alpine
           name: redmine
-          command: [
-            'sh',
-            '-c',
-            'apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.7 /usr/src/redmine/plugins/redmine_webhook; /docker-entrypoint.sh rails server -b 0.0.0.0'
-          ]
+          command:
+            [
+              "sh",
+              "-c",
+              "apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.7 /usr/src/redmine/plugins/redmine_webhook; /docker-entrypoint.sh rails server -b 0.0.0.0",
+            ]
           livenessProbe:
             httpGet:
-              path: /issues.json
+              path: /login
               port: 3000
             failureThreshold: 1
             periodSeconds: 10
           startupProbe:
             httpGet:
-              path: /issues.json
+              path: /login
               port: 3000
             failureThreshold: 360
             periodSeconds: 10
