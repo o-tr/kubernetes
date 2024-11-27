@@ -38,6 +38,11 @@ spec:
           env:
             - name: REDMINE_PLUGINS_MIGRATE
               value: "true"
+            - name: REDMINE_SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-appsettings
+                  key: secret_key_base
             - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
