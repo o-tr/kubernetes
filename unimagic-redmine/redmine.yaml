@@ -21,7 +21,7 @@ spec:
           command: [
             'sh',
             '-c',
-            'apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.6 /usr/src/redmine/plugins/redmine_webhook; /docker-entrypoint.sh rails server -b 0.0.0.0'
+            'apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.7 /usr/src/redmine/plugins/redmine_webhook; /docker-entrypoint.sh rails server -b 0.0.0.0'
           ]
           livenessProbe:
             httpGet:
