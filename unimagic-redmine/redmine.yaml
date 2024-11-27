@@ -42,7 +42,12 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
+            - name: redmine-plugins-persistent-storage
+              mountPath: /usr/src/redmine/plugins
       volumes:
         - name: redmine-files-persistent-storage
           persistentVolumeClaim:
             claimName: redmine-files-pvc
+        - name: redmine-plugins-persistent-storage
+          persistentVolumeClaim:
+            claimName: redmine-plugins-pvc
