@@ -42,12 +42,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: redmine-appsettings
-                  key: secret_key_base
-            - name: secret_key_base
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: secret_key_base
+                  key: supersecretkey
             - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
