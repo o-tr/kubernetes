@@ -19,11 +19,6 @@ spec:
         - image: redmine:6-alpine
           name: redmine
           env:
-            - name: REDMINE_SECRET_KEY_BASE
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: secret_key_base
             - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
