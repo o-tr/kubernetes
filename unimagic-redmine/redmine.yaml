@@ -17,8 +17,6 @@ spec:
       containers:
         - image: redmine:6
           name: redmine
-          command: ['sh', '-c']
-          args: ['cp /usr/src/config/configuration.yml /usr/src/redmine/config/configuration.yml && /docker-entrypoint.sh rails server -b 0.0.0.0']
           env:
             - name: REDMINE_SECRET_KEY_BASE
               valueFrom:
@@ -48,12 +46,7 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
-            - name: configuration
-              mountPath: /usr/src/config
       volumes:
         - name: redmine-files-persistent-storage
           persistentVolumeClaim:
             claimName: redmine-files-pvc
-        - name: configuration
-          configMap:
-            name: redmine-configuration
