@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: unimagic-redmine
+  name: unimagic-redmine-svc
+spec:
+  selector:
+    app: redmine
+  ports:
+  - protocol: TCP
+    port: 10083
+    targetPort: 80
+  type: LoadBalancer
