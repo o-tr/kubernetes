@@ -4,6 +4,8 @@ metadata:
   name: redmine-files-pvc
   namespace: unimagic-redmine
 spec:
+  accessModes:
+    - ReadWriteMany
   resources:
     requests:
       storage: "100Gi"
