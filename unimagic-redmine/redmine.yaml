@@ -18,6 +18,18 @@ spec:
       containers:
         - image: redmine:6-alpine
           name: redmine
+          livenessProbe:
+            httpGet:
+              path: /issues.json
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /issues.json
+              port: 3000
+            failureThreshold: 360
+            periodSeconds: 10
           env:
             - name: REDMINE_DB_MYSQL
               valueFrom:
