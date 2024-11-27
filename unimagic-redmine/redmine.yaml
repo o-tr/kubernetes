@@ -25,7 +25,7 @@ spec:
                 secretKeyRef:
                   name: redmine-appsettings
                   key: secret_key_base
-            - name: REDMINE_DB_POSTGRES
+            - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
                   name: redmine-appsettings
