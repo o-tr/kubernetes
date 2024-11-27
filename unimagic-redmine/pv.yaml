@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redmine-files-pvc
+  namespace: unimagic-redmine
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: "100Gi"
+  selector:
+    matchLabels:
+      name: redmine-files-pv
