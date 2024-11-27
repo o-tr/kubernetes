@@ -15,7 +15,7 @@ spec:
         app: redmine
     spec:
       containers:
-        - image: redmine:6
+        - image: redmine:6-alpine
           name: redmine
           env:
             - name: REDMINE_SECRET_KEY_BASE
