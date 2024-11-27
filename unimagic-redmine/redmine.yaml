@@ -18,6 +18,11 @@ spec:
       containers:
         - image: redmine:6-alpine
           name: redmine
+          command: [
+            'sh',
+            '-c',
+            'apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook /usr/src/redmine/plugins/redmine_webhook; /docker-entrypoint.sh rails server -b 0.0.0.0'
+          ]
           livenessProbe:
             httpGet:
               path: /issues.json
@@ -31,6 +36,8 @@ spec:
             failureThreshold: 360
             periodSeconds: 10
           env:
+            - name: REDMINE_PLUGINS_MIGRATE
+              value: "true"
             - name: REDMINE_DB_MYSQL
               valueFrom:
                 secretKeyRef:
@@ -54,12 +61,7 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
-            - name: redmine-plugins-persistent-storage
-              mountPath: /usr/src/redmine/plugins
       volumes:
         - name: redmine-files-persistent-storage
           persistentVolumeClaim:
             claimName: redmine-files-pvc
-        - name: redmine-plugins-persistent-storage
-          persistentVolumeClaim:
-            claimName: redmine-plugins-pvc
