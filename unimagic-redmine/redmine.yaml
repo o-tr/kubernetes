@@ -6,6 +6,7 @@ metadata:
   labels:
     app: redmine
 spec:
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: redmine
