@@ -59,6 +59,13 @@ spec:
                 secretKeyRef:
                   name: redmine-appsettings
                   key: db_password
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+            requests:
+              memory: 1Gi
+              cpu: "0.1"
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
