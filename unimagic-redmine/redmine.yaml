@@ -69,7 +69,7 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
-            - name: redmine-secret-key-base
+            - name: redmine-secret
               mountPath: /usr/src/config/secret_key_base
               subPath: secrets.yml
       volumes:
