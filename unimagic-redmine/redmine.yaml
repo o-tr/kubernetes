@@ -22,7 +22,7 @@ spec:
             [
               "sh",
               "-c",
-              "apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.7 /usr/src/redmine/plugins/redmine_webhook; git clone https://github.com/o-tr/kanban -b v0.0.12 /usr/src/redmine/plugins/kanban; /docker-entrypoint.sh rails server -b 0.0.0.0",
+              "apk add --no-cache build-base; apk add --no-cache ruby-dev; apk add --no-cache libc-dev; git clone https://github.com/o-tr/redmine_webhook -b v0.0.7 /usr/src/redmine/plugins/redmine_webhook; git clone https://github.com/o-tr/kanban -b v0.0.13 /usr/src/redmine/plugins/kanban; /docker-entrypoint.sh rails server -b 0.0.0.0",
             ]
           livenessProbe:
             httpGet:
