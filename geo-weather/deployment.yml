@@ -13,6 +13,18 @@ spec:
       labels:
         app: geo-weather
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - geo-weather
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: geo-weather
           image: ghcr.io/o-tr/geo-weather:release
