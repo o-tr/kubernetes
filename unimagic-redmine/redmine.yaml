@@ -16,7 +16,7 @@ spec:
         app: redmine
     spec:
       containers:
-        - image: redmine:6-alpine
+        - image: redmine:6.0.1-alpine
           name: redmine
           command:
             [
