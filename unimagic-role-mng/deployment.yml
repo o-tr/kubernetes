@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unimagic-role-mng
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: unimagic-role-mng
+  replicas: 1 # You could also consider elastic scaling for this deployment
+  template:
+    metadata:
+      labels:
+        app: unimagic-role-mng
+    spec:
+      containers:
+        - name: unimagic-role-mng
+          image: ghcr.io/o-tr/role-management-automation:release
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: unimagic-role-mng-config
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /api/healthz
+              port: 3000
+            failureThreshold: 360
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "2"
+            requests:
+              memory: 1Gi
+              cpu: "1"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: unimagic-role-mng-svc
+spec:
+  selector:
+    app: unimagic-role-mng
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
