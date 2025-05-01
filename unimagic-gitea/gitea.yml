@@ -283,7 +283,10 @@ spec:
         ## @param persistence.subPath Subdirectory of the volume to mount at
         ## @param persistence.volumeName Name of persistent volume in PVC
         persistence:
-          enabled: false
+          enabled: true
+          create: true
+          mount: true
+          size: 50Gi
 
         ## @param extraContainers Additional sidecar containers to run in the pod
         extraContainers: []
