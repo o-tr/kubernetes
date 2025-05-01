@@ -108,7 +108,6 @@ spec:
         ## @param podDisruptionBudget Pod disruption budget
         podDisruptionBudget:
           maxUnavailable: 1
-          minAvailable: 1
 
         ## @section Service
         service:
