@@ -531,14 +531,14 @@ spec:
               SSH_LISTEN_PORT: 2222 # rootless image
             queue:
               TYPE: redis
-              CONN_STR: redis://dragonfly.unimagic-gitea.svc.cluster.local:6379
+              CONN_STR: redis://gitea-dragonfly.unimagic-gitea.svc.cluster.local:6379
             session:
               PROVIDER: redis
-              PROVIDER_CONFIG: redis://dragonfly.unimagic-gitea.svc.cluster.local:6379
+              PROVIDER_CONFIG: redis://gitea-dragonfly.unimagic-gitea.svc.cluster.local:6379
             cache:
               ENABLED: true
               ADAPTOR: false
-              HOST: redis://dragonfly.unimagic-gitea.svc.cluster.local:6379
+              HOST: redis://gitea-dragonfly.unimagic-gitea.svc.cluster.local:6379
             database:
               DB_TYPE: mysql
               HOST: basic-tidb.tidb-cluster.svc.cluster.local:4000
