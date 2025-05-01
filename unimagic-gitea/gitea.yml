@@ -542,7 +542,7 @@ spec:
             database:
               DB_TYPE: mysql
               HOST: basic-tidb.tidb-cluster.svc.cluster.local:4000
-              NAME: gitea
+              NAME: giteadb
               USER: gitea
               PASSWD: gitea
             picture:
