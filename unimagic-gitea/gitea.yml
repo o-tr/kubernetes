@@ -286,6 +286,8 @@ spec:
           create: true
           mount: true
           size: 50Gi
+          accessModes:
+            - ReadWriteOnce
 
         ## @param extraContainers Additional sidecar containers to run in the pod
         extraContainers: []
