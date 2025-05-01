@@ -5,11 +5,8 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-  - repoURL: https://github.com/o-tr/kubernetes
-    targetRevision: master
-    ref: repo
-  - repoURL: https://dl.gitea.com/charts/
+  source:
+    repoURL: https://dl.gitea.com/charts/
     chart: gitea
     targetRevision: 11.0.1
     helm:
