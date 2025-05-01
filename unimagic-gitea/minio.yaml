@@ -61,7 +61,7 @@ spec:
           resources:
             requests:
               storage: 32Gi
-          storageClassName: minio-storage
+          storageClassName: nfs-client
         status: {}
       volumesPerServer: 2
   priorityClassName: ""
