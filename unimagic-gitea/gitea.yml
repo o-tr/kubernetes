@@ -11,7 +11,7 @@ spec:
     targetRevision: 11.0.1
     helm:
       releaseName: gitea
-      valueObjects:
+      valuesObject:
         # Default values for gitea.
         # This is a YAML-formatted file.
         # Declare variables to be passed into your templates.
