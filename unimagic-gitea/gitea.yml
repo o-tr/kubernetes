@@ -186,7 +186,7 @@ spec:
             # kubernetes.io/ingress.class: nginx
             # kubernetes.io/tls-acme: "true"
           hosts:
-            - host: git.example.com
+            - host: unimagic-gitea.ootr.jp
               paths:
                 - path: /
                   pathType: Prefix
@@ -655,11 +655,9 @@ spec:
         ##
         extraDeploy: []
 
-
   destination:
     server: https://kubernetes.default.svc
     namespace: unimagic-gitea
   syncPolicy:
     syncOptions:
       - ServerSideApply=true
-
