@@ -545,18 +545,6 @@ spec:
               NAME: giteadb
               USER: gitea
               PASSWD: gitea
-            picture:
-              AVATAR_STORAGE_TYPE: minio
-            storage:
-              STORAGE_TYPE: minio
-              SERVE_DIRECT: false
-              MINIO_ENDPOINT: minio.unimagic-gitea.svc.cluster.local:9000
-              MINIO_LOCATION: ap-northeast-1
-              MINIO_ACCESS_KEY_ID: minio
-              MINIO_SECRET_ACCESS_KEY: minio123
-              MINIO_BUCKET: gitea
-              MINIO_USE_SSL: true
-              MINIO_INSECURE_SKIP_VERIFY: true
           #
           #  security:
           #    PASSWORD_COMPLEXITY: spec
