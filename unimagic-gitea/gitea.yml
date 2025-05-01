@@ -6,12 +6,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://dl.gitea.com/charts/
+  - repoURL: https://dl.gitea.com/charts/
     chart: gitea
     targetRevision: 11.0.1
     helm:
       valueFiles:
         - $repo/unimagic-gitea/values.yml
+  - repoURL: https://github.com/o-tr/kubernetes
+    targetRevision: HEAD
+    ref: repo
   destination:
     server: https://kubernetes.default.svc
     namespace: unimagic-gitea
