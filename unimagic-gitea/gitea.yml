@@ -10,6 +10,7 @@ spec:
     chart: gitea
     targetRevision: 11.0.1
     helm:
+      releaseName: gitea
       valueFiles:
         - $repo/unimagic-gitea/values.yml
   - repoURL: https://github.com/o-tr/kubernetes
