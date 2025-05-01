@@ -14,7 +14,7 @@ spec:
       valueFiles:
         - $repo/unimagic-gitea/values.yml
   - repoURL: https://github.com/o-tr/kubernetes
-    targetRevision: HEAD
+    targetRevision: master
     ref: repo
   destination:
     server: https://kubernetes.default.svc
