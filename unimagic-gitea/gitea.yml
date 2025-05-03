@@ -532,6 +532,7 @@ spec:
             server:
               SSH_PORT: 22 # rootful image
               SSH_LISTEN_PORT: 2222 # rootless image
+              ROOT_URL: https://unimagic-gitea.ootr.jp
             queue:
               TYPE: redis
               CONN_STR: redis://gitea-dragonfly.unimagic-gitea.svc.cluster.local:6379
