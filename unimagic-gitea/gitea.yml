@@ -545,7 +545,7 @@ spec:
               HOST: redis://gitea-dragonfly.unimagic-gitea.svc.cluster.local:6379
             database:
               DB_TYPE: mysql
-              HOST: basic-tidb.tidb-cluster.svc.cluster.local:4000
+              HOST: ceph-cluster-tidb.tidb-cluster.svc.cluster.local:4000
               NAME: giteadb
               USER: gitea
               PASSWD: gitea
