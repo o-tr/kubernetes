@@ -58,24 +58,6 @@ spec:
             requests:
               memory: 512Mi
               cpu: "0.5"
-        - name: nginx-proxy
-          image: nginx
-          ports:
-            - containerPort: 80
-          resources:
-            limits:
-              memory: 1Gi
-              cpu: "1"
-            requests:
-              memory: 0.5Gi
-              cpu: "0.1"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/nginx/conf.d/
-      volumes:
-        - name: config
-          configMap:
-            name: image-slide-nginx-config
 ---
 kind: Service
 apiVersion: v1
