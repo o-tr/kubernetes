@@ -32,7 +32,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
         - name: image-slide-frontend
-          image: ghcr.io/o-tr/imageslide-converter:v0.0.4
+          image: ghcr.io/o-tr/imageslide-converter:v0.0.5
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -71,8 +71,4 @@ spec:
       port: 3000
       targetPort: 3000
       name: frontend
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      name: nginx
   type: LoadBalancer
