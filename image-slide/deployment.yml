@@ -14,25 +14,25 @@ spec:
         app: image-slide-frontend
     spec:
       topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app: image-slide-frontend
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: image-slide-frontend
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - image-slide-frontend
-            topologyKey: "kubernetes.io/hostname"
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - image-slide-frontend
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: image-slide-frontend
-          image: ghcr.io/o-tr/imageslide-converter:v0.0.6
+          image: ghcr.io/o-tr/imageslide-converter:v0.0.7
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
