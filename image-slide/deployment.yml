@@ -32,7 +32,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: image-slide-frontend
-          image: ghcr.io/o-tr/imageslide-converter:v0.0.7
+          image: ghcr.io/o-tr/imageslide-converter:v0.0.8
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
