@@ -7,15 +7,32 @@ spec:
   selector:
     matchLabels:
       app: role-mng
-  replicas: 1 # You could also consider elastic scaling for this deployment
+  replicas: 2
   template:
     metadata:
       labels:
         app: role-mng
     spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: image-slide-frontend
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - image-slide-frontend
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: role-mng
-          image: ghcr.io/o-tr/role-management-automation:release
+          image: ghcr.io/o-tr/role-management-automation:v0.1.4
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -39,8 +56,8 @@ spec:
               memory: 1Gi
               cpu: "0.5"
             requests:
-              memory: 1Gi
-              cpu: "0.5"
+              memory: 512Mi
+              cpu: "0.25"
 ---
 kind: Service
 apiVersion: v1
