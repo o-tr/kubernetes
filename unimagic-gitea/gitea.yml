@@ -207,11 +207,11 @@ spec:
           # resources, such as Minikube. If you do want to specify resources, uncomment the following
           # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
           limits:
-            cpu: 500m
-            memory: 512Mi
+            cpu: 2
+            memory: 2Gi
           requests:
-            cpu: 500m
-            memory: 512Mi
+            cpu: 1
+            memory: 1Gi
 
         ## Use an alternate scheduler, e.g. "stork".
         ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
