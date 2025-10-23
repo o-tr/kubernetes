@@ -59,6 +59,11 @@ spec:
                 secretKeyRef:
                   name: redmine-appsettings
                   key: db_password
+            - name: REDMINE_DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-appsettings
+                  key: db_port
             - name: REDMINE_DB_ENCODING
               value: utf8mb4
           resources:
