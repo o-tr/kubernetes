@@ -51,9 +51,25 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
+            - name: redmine-config
+              mountPath: /usr/src/redmine/config
+      initContainers:
+        - name: copy-db-config
+          image: busybox:1.35
+          command:
+            - sh
+            - -c
+            - |
+              # copy database.yml from the configMap mount to the writable emptyDir
+              cp /tmp-config/database.yml /workdir/database.yml
+              # try to set ownership to redmine uid (1000) if available; ignore errors
+              chown -R 1000:1000 /workdir || true
+              chmod 640 /workdir/database.yml || true
+          volumeMounts:
             - name: redmine-db-config
-              mountPath: /usr/src/redmine/config/database.yml
-              subPath: database.yml
+              mountPath: /tmp-config
+            - name: redmine-config
+              mountPath: /workdir
       volumes:
         - name: redmine-files-persistent-storage
           persistentVolumeClaim:
@@ -64,3 +80,5 @@ spec:
             items:
               - key: database.yml
                 path: database.yml
+        - name: redmine-config
+          emptyDir: {}
