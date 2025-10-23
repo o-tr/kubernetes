@@ -39,26 +39,6 @@ spec:
           env:
             - name: REDMINE_PLUGINS_MIGRATE
               value: "true"
-            - name: REDMINE_DB_MYSQL
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: db_host
-            - name: REDMINE_DB_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: db_name
-            - name: REDMINE_DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: db_username
-            - name: REDMINE_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redmine-appsettings
-                  key: db_password
             - name: REDMINE_DB_ENCODING
               value: utf8mb4
           resources:
@@ -71,7 +51,16 @@ spec:
           volumeMounts:
             - name: redmine-files-persistent-storage
               mountPath: /usr/src/redmine/files
+            - name: redmine-db-config
+              mountPath: /usr/src/redmine/config/database.yml
+              subPath: database.yml
       volumes:
         - name: redmine-files-persistent-storage
           persistentVolumeClaim:
             claimName: redmine-files-pvc
+        - name: redmine-db-config
+          configMap:
+            name: redmine-appsettings
+            items:
+              - key: database.yml
+                path: database.yml
