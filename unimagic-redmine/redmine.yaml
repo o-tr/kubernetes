@@ -60,7 +60,7 @@ spec:
             claimName: redmine-files-pvc
         - name: redmine-db-config
           configMap:
-            name: redmine-appsettings
+            name: redmine-db-config
             items:
               - key: database.yml
                 path: database.yml
