@@ -25,7 +25,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: geo-weather
-          image: ghcr.io/o-tr/geo-weather:release
+          image: ghcr.io/o-tr/geo-weather:latest
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
