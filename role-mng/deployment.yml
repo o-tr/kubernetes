@@ -19,7 +19,7 @@ spec:
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
-              app: image-slide-frontend
+              app: role-mng
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -28,7 +28,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - image-slide-frontend
+                      - role-mng
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: role-mng
@@ -71,3 +71,13 @@ spec:
       port: 3000
       targetPort: 3000
   type: LoadBalancer
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: role-mng-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: role-mng
